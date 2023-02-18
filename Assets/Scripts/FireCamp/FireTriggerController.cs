@@ -40,4 +40,5 @@ public class FireTriggerController : MonoBehaviour
             playerinrange = false;
         }
     }
+
 }

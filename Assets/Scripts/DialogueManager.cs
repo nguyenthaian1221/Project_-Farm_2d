@@ -48,7 +48,19 @@ public class DialogueManager : MonoBehaviour
             pressToContinue.SetActive(true);
 
         }
-        
+
+
+        #region Quick Exit Dialog.
+        if (dialogueBox.activeSelf && Input.GetKeyDown(KeyCode.Escape))
+        {
+            StopAllCoroutines();
+            dialogueBox.SetActive(false);
+            toolbar.SetActive(true);
+            chest.SetActive(true);
+
+            shop.SetActive(true);
+        }
+        #endregion 
     }
 
     IEnumerator Type()
@@ -86,4 +98,7 @@ public class DialogueManager : MonoBehaviour
             
         }
     }
+
+
+
 }
