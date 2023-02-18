@@ -70,16 +70,16 @@ public class DayTimeController : MonoBehaviour
         TimeDisplay.text = hours.ToString("00") + ":00";
         Light2D light = transform.GetComponent<Light2D>();
 
-        //Daylight from 4 to 20
-        if (time > 25200f && time < 72000f)
+        //Daylight from 5am to 6pm
+        if (time > 25200f && time < 64800f)
         {
             light.intensity = 1f;
             TemperatureController.currentTemperature = 100;
         }
 
 
-        //It gets brighter from 8pm - 4am
-        if ((time > 72000f && time < 86400f) || ((time > 0f && time < 18000f)))
+        //It gets darker from 6pm - 5am
+        if ((time > 64800f && time < 86400f) || ((time > 0f && time < 18000f)))
         {
             if (light.intensity > 0.3f)
             {
@@ -92,7 +92,7 @@ public class DayTimeController : MonoBehaviour
             }
         }
         
-        //Lights up 4 - 7
+        //Lights up 5am - 7am
         if (time > 18000f && time < 25200f)
         {
             if (light.intensity < 1f)
