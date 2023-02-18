@@ -41,35 +41,36 @@ public class DayTimeController : MonoBehaviour
         if (Time.timeScale == 0)
             return;
 
-        //licznik wskaźnika głodu i temperatury
+        //Hunger and temperature indicator counter
         hungerUpdaterCounter += 1;
         temperatureUpdateCounter += 1;
-        //tutaj dostosowac jak szybko maleje wskaznik najedzenia
+        //Here you can adjust the rate of decrease
+
         if (hungerUpdaterCounter == 250)
         {
             HungerController.currentHunger -= 1;
             hungerUpdaterCounter = 0;
         }
-        //gdy wskaźnik najedzenia lub temperatury jest niższy niż 10, zaczyna ubywać zdrowia:
-        if(HungerController.currentHunger < 10 || TemperatureController.currentTemperature < 10)
+        //when hunger point or temperature point is lower than 10, health starts to deplete:
+        if (HungerController.currentHunger < 10 || TemperatureController.currentTemperature < 10)
         {
             healthUpdaterCounter += 1;
-            //tutaj dostosowac jak szybko maleje wskaznik zdrowia
+            //Here you can adjust the rate at which your health stats decrease
             if (healthUpdaterCounter == 100)
             {
                 HealthController.currentHealth -= 1;
                 healthUpdaterCounter = 0;
             }
         }
-        
 
-        //Kontrola czasu i wyświetlanie
+
+        //Control and display the time
         time += Time.deltaTime * TimeScale;
         int hours = (int)getHours;
         TimeDisplay.text = hours.ToString("00") + ":00";
         Light2D light = transform.GetComponent<Light2D>();
 
-        //Światło dzienne od 4 do 20
+        //Daylight from 4 to 20
         if (time > 25200f && time < 72000f)
         {
             light.intensity = 1f;
@@ -77,7 +78,7 @@ public class DayTimeController : MonoBehaviour
         }
 
 
-        //Rozjaśnia się w godzinach 20 - 4
+        //It gets brighter from 8pm - 4am
         if ((time > 72000f && time < 86400f) || ((time > 0f && time < 18000f)))
         {
             if (light.intensity > 0.3f)
@@ -103,15 +104,15 @@ public class DayTimeController : MonoBehaviour
             }
         }
 
-        //Zmiana dnia na nowy
+        //Change the date to a new day
         if (time > SecondsInDay)
         {
             time = 0;
             day += 1;
-            //codzienna dostawa punktow
+            //daily increase money 
             MoneyController.money += 200;
         }
-        //Jesli zdrowie spranie do 0 zmiana na scene game over
+        //
         if(HealthController.currentHealth < 1)
         {
             Application.LoadLevel(3);

@@ -10,34 +10,29 @@ public class PlayerHitReaction : PlayerHit
     {
         toolbar = GameObject.FindWithTag("toolbar");
         toolbarController = GetComponent<ToolbarController>();
-        
+
         switch (toolbarController.GetItem.Name)
         {
             case "Food_Corn":
-                Debug.Log("Zjadłeś kukurydze");
                 AddHunger(20);
                 break;
 
             case "Food_Parsley":
-                Debug.Log("Zjadłeś pietruszkę");
                 AddHealth(5);
                 AddHunger(10);
                 break;
 
             case "Food_Potato":
-                Debug.Log("Zjadłeś ziemniaka");
                 AddHealth(5);
                 AddHunger(40);
                 break;
 
             case "Food_Strawberry":
-                Debug.Log("Zjadłeś truskawkę");
                 AddHealth(30);
                 AddHunger(10);
                 break;
 
             case "Food_Tomato":
-                Debug.Log("Zjadłeś pomidora");
                 AddHunger(30);
                 break;
         }
@@ -48,7 +43,7 @@ public class PlayerHitReaction : PlayerHit
 
     void AddHunger(int add)
     {
-        if(HungerController.currentHunger + add < 100)
+        if (HungerController.currentHunger + add < 100)
             HungerController.currentHunger += add;
         else
             HungerController.currentHunger = 100;
