@@ -46,6 +46,12 @@ public class ToolsCharacterController : MonoBehaviour
     UI_ShopController shopPanel;
 
 
+    // for hack 
+    [SerializeField] Item item_hackWood;
+    [SerializeField] Item item_hackPotato;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,7 +72,7 @@ public class ToolsCharacterController : MonoBehaviour
         SelectTile();
         CanSelectCheck();
         Marker();
-        if (Input.GetMouseButtonDown(0)) 
+        if (Input.GetMouseButtonDown(0))
         {
             if (!inventoryController.isOpen) //you can use tools only if inventory is closed
             {
@@ -115,7 +121,7 @@ public class ToolsCharacterController : MonoBehaviour
         }
         return false;
     }
-            private void SelectTile()
+    private void SelectTile()
     {
         selectedTilePosition = tileMapReadController.GetGridPosition(Input.mousePosition, true);
         TileBase tileBase = tileMapReadController.GetTileBase(selectedTilePosition);
@@ -402,5 +408,16 @@ public class ToolsCharacterController : MonoBehaviour
             }
 
         }
+    }
+
+    public void HACK9999GAME()
+    {
+        // Money = 9999
+        MoneyController.money = 9999;
+        GameManager.instance.inventoryContainer.Add(item_hackWood, 9999);
+        RefreshToolbar();
+        GameManager.instance.inventoryContainer.Add(item_hackPotato, 9999);
+        RefreshToolbar();
+        //
     }
 }
