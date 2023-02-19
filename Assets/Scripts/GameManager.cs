@@ -18,4 +18,31 @@ public class GameManager : MonoBehaviour
     public DragAndDropController dragAndDropController;
 
     public ToolbarController toolbarControllerGlobal;
+
+
+
+
+    private bool isWinFunctionCalled = false;
+    private bool isHackFunctionCalled = false;
+
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.H) && Input.GetKey(KeyCode.W) && !isWinFunctionCalled)
+        {
+            isWinFunctionCalled = true;
+            Application.LoadLevel(4);
+        }
+
+
+        if (Input.GetKey(KeyCode.H) && Input.GetKey(KeyCode.M) && !isHackFunctionCalled)
+        {
+            isHackFunctionCalled = true;
+            player.GetComponent<ToolsCharacterController>().HACK9999GAME();
+        }
+
+
+    }
+
+
+
 }
